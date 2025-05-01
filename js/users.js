@@ -4,13 +4,13 @@ function renderRecipes(data) {
    const wrapper = document.querySelector(".wrapper");
    const fragment = document.createDocumentFragment();
 
-   data?.recipes.forEach((res) => {
+   data?.users.forEach((res) => {
       const card = document.createElement("div");
       card.className = "card";
       card.innerHTML = `
          <img src="${res.image}" alt="" />
-         <h3>${res.name}</h3>
-         <p>${res.cuisine}</p>
+         <h3>${res.firstName}</h3>
+         <p>${res.age} years old</p>
       `;
 
       fragment.appendChild(card);
@@ -20,12 +20,13 @@ function renderRecipes(data) {
 }
 
 async function fetchData(endpoint) {
-   const response = await fetch(`${BASE_URL}${endpoint}`);
-   const data = await response.json();
+    const response = await fetch(`${BASE_URL}${endpoint}`);
+    const data = await response.json();
+    console.log(data);
 
    renderRecipes(data);
 }
 
 window.addEventListener("load", () => {
-   fetchData("recipes");
+   fetchData("users");
 });
